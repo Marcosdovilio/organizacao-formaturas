@@ -1,0 +1,27 @@
+{
+  "name": "organizacao-formaturas",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "engines": {
+    "node": "22.x"
+  },
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "test": "node --test tests/domain.test.js tests/excel.test.js",
+    "test:e2e": "playwright test"
+  },
+  "dependencies": {
+    "next": "^16.1.6",
+    "react": "^19.2.4",
+    "react-dom": "^19.2.4",
+    "pg": "^8.16.3",
+    "exceljs": "^4.4.0",
+    "lucide-react": "^0.577.0"
+  },
+  "devDependencies": {
+    "@playwright/test": "^1.58.2"
+  }
+}
