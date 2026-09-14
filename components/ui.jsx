@@ -1,10 +1,10 @@
 'use client';
-import {useEffect,useRef,useState} from 'react';
+import {useEffect,useRef,useState,useId,Children,isValidElement,cloneElement} from 'react';
 import {createPortal} from 'react-dom';
 import {X,LoaderCircle} from 'lucide-react';
 export function Button({children,variant='primary',className='',...props}){return <button type="button" className={'button '+variant+' '+className} {...props}>{children}</button>;}
 export function Badge({children}){const cls=['Contratado','Definido'].includes(children)?'success':children==='Em cotação'?'warning':['Cancelado','Não se aplica'].includes(children)?'muted':'neutral';return <span className={'badge '+cls}>{children}</span>;}
-export function Field({label,hint,children,className=''}){return <label className={'field '+className}><span>{label}</span>{children}{hint&&<small>{hint}</small>}</label>;}
+export function Field({label,hint,children,className=''}){const id=useId();return <div className={'field '+className}><label htmlFor={id}>{label}</label>{Children.map(children,child=>isValidElement(child)&&['input','select','textarea'].includes(child.type)?cloneElement(child,{id,'aria-describedby':hint?id+'-hint':undefined}):child)}{hint&&<small id={id+'-hint'}>{hint}</small>}</div>;}
 export function Empty({icon:Icon,title,children,action}){return <div className="empty">{Icon&&<div className="empty-icon"><Icon size={26}/></div>}<h3>{title}</h3>{children&&<p>{children}</p>}{action}</div>;}
 export function Modal({title,children,onClose,wide=false,busy=false}){
  const ref=useRef(null),[mounted,setMounted]=useState(false);
